@@ -1,0 +1,11 @@
+mode: set
+edu-golang-pro/cover/codeCover.go:8.23,9.12 1 1
+edu-golang-pro/cover/codeCover.go:9.12,11.3 1 1
+edu-golang-pro/cover/codeCover.go:11.8,11.19 1 1
+edu-golang-pro/cover/codeCover.go:11.19,13.3 1 1
+edu-golang-pro/cover/codeCover.go:13.8,15.3 1 1
+edu-golang-pro/cover/codeCover.go:18.23,19.12 1 1
+edu-golang-pro/cover/codeCover.go:19.12,21.3 1 1
+edu-golang-pro/cover/codeCover.go:21.8,21.19 1 0
+edu-golang-pro/cover/codeCover.go:21.19,23.3 1 0
+edu-golang-pro/cover/codeCover.go:23.8,25.3 1 0
