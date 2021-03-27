@@ -8,7 +8,7 @@ import (
 	"github.com/goml/gobrain"
 )
 
-func main() {
+func neural() {
 	seed := time.Now().Unix()
 	rand.Seed(seed)
 

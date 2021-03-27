@@ -12,23 +12,6 @@ import (
 	"strings"
 )
 
-func variance(x []float64) float64 {
-	mean := meanValue(x)
-	sum := float64(0)
-	for _, v := range x {
-		sum = sum + (v-mean)*(v-mean)
-	}
-	return sum / float64(len(x))
-}
-
-func meanValue(x []float64) float64 {
-	sum := float64(0)
-	for _, v := range x {
-		sum = sum + v
-	}
-	return sum / float64(len(x))
-}
-
 func outliers(x []float64, limit float64) []float64 {
 	deviation := math.Sqrt(variance(x))
 	mean := meanValue(x)
@@ -47,7 +30,7 @@ func outliers(x []float64, limit float64) []float64 {
 	return y
 }
 
-func main() {
+func outliner() {
 	flag.Parse()
 	if len(flag.Args()) != 2 {
 		fmt.Printf("usage: stats filename limit\n")

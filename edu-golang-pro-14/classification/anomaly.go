@@ -1,10 +1,8 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"math/rand"
-	"strconv"
 	"time"
 
 	"github.com/lytics/anomalyzer"
@@ -14,18 +12,7 @@ func randomA(min, max int) int {
 	return rand.Intn(max-min) + min
 }
 
-func main() {
-	flag.Parse()
-	if len(flag.Args()) == 0 {
-		fmt.Printf("usage: anomaly MAX\n")
-		return
-	}
-
-	MAX, err := strconv.Atoi(flag.Args()[0])
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+func anomaly(MAX int) {
 
 	conf := &anomalyzer.AnomalyzerConf{
 		Sensitivity: 0.1,

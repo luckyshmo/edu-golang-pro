@@ -1,10 +1,9 @@
 package main
 
 import (
-	"flag"
 	"fmt"
+
 	"github.com/mash/gokmeans"
-	"strconv"
 )
 
 var observations []gokmeans.Node = []gokmeans.Node{
@@ -19,18 +18,7 @@ var observations []gokmeans.Node = []gokmeans.Node{
 	gokmeans.Node{-1},
 }
 
-func main() {
-	flag.Parse()
-	if len(flag.Args()) == 0 {
-		fmt.Printf("usage: cluster k\n")
-		return
-	}
-
-	k, err := strconv.Atoi(flag.Args()[0])
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+func clusteringData(k int) {
 
 	if success, centroids := gokmeans.Train(observations, k, 50); success {
 		fmt.Println("The centroids are the following:")

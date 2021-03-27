@@ -2,30 +2,19 @@ package main
 
 import (
 	"encoding/csv"
-	"flag"
 	"fmt"
-	"gonum.org/v1/gonum/stat"
 	"os"
 	"strconv"
+
+	"gonum.org/v1/gonum/stat"
 )
 
-type xy struct {
-	x []float64
-	y []float64
-}
+func reg() (float64, float64) {
 
-func main() {
-	flag.Parse()
-	if len(flag.Args()) == 0 {
-		fmt.Printf("usage: regression filename\n")
-		return
-	}
-
-	filename := flag.Args()[0]
+	filename := "reg_data.txt"
 	file, err := os.Open(filename)
 	if err != nil {
 		fmt.Println(err)
-		return
 	}
 	defer file.Close()
 
@@ -34,7 +23,6 @@ func main() {
 	records, err := r.ReadAll()
 	if err != nil {
 		fmt.Println(err)
-		return
 	}
 	size := len(records)
 
@@ -61,4 +49,5 @@ func main() {
 	b, a := stat.LinearRegression(data.x, data.y, nil, false)
 	fmt.Printf("%.4v x + %.4v\n", a, b)
 	fmt.Printf("a = %.4v b = %.4v\n", a, b)
+	return a, b
 }

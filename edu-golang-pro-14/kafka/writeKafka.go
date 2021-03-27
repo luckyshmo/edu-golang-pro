@@ -4,11 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/segmentio/kafka-go"
 	"math/rand"
 	"os"
 	"strconv"
 	"time"
+
+	"github.com/segmentio/kafka-go"
 )
 
 type Record struct {

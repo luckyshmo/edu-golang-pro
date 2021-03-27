@@ -2,20 +2,15 @@ package main
 
 import (
 	"encoding/csv"
-	"flag"
 	"fmt"
-	"gonum.org/v1/plot"
-	"gonum.org/v1/plot/plotter"
-	"gonum.org/v1/plot/vg"
 	"image/color"
 	"os"
 	"strconv"
-)
 
-type xy struct {
-	x []float64
-	y []float64
-}
+	"gonum.org/v1/plot"
+	"gonum.org/v1/plot/plotter"
+	"gonum.org/v1/plot/vg"
+)
 
 func (d xy) Len() int {
 	return len(d.x)
@@ -27,14 +22,11 @@ func (d xy) XY(i int) (x, y float64) {
 	return
 }
 
-func main() {
-	flag.Parse()
-	if len(flag.Args()) < 3 {
-		fmt.Printf("usage: plotLR filename a b\n")
-		return
-	}
+// go run plotLR.go reg_data.txt 0.9463 -0.3985
+func plotLR(a float64, b float64) {
 
-	filename := flag.Args()[0]
+	filename := "reg_data.txt"
+
 	file, err := os.Open(filename)
 	if err != nil {
 		fmt.Println(err)
@@ -43,18 +35,6 @@ func main() {
 	defer file.Close()
 
 	r := csv.NewReader(file)
-
-	a, err := strconv.ParseFloat(flag.Args()[1], 64)
-	if err != nil {
-		fmt.Println(a, "not a valid float!")
-		return
-	}
-
-	b, err := strconv.ParseFloat(flag.Args()[2], 64)
-	if err != nil {
-		fmt.Println(b, "not a valid float!")
-		return
-	}
 
 	records, err := r.ReadAll()
 	if err != nil {
@@ -89,11 +69,7 @@ func main() {
 	line := plotter.NewFunction(func(x float64) float64 { return a*x + b })
 	line.Color = color.RGBA{B: 255, A: 255}
 
-	p, err := plot.New()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	p := plot.New()
 
 	plotter.DefaultLineStyle.Width = vg.Points(1)
 	plotter.DefaultGlyphStyle.Radius = vg.Points(2)
@@ -113,7 +89,9 @@ func main() {
 		return
 	}
 
-	_, err = w.WriteTo(os.Stdout)
+	f, _ := os.Create("out.svg")
+
+	_, err = w.WriteTo(f)
 	if err != nil {
 		fmt.Println(err)
 		return
