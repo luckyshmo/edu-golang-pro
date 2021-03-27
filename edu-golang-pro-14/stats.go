@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"flag"
 	"fmt"
 	"io"
 	"math"
@@ -37,7 +36,6 @@ func medianValue(x []float64) float64 {
 		// Even
 		return (x[length/2] + x[(length/2)-1]) / 2
 	}
-	return 0
 }
 
 func variance(x []float64) float64 {
@@ -50,15 +48,10 @@ func variance(x []float64) float64 {
 }
 
 func main() {
-	flag.Parse()
-	if len(flag.Args()) == 0 {
-		fmt.Printf("usage: stats filename\n")
-		return
-	}
 
 	data := make([]float64, 0)
 
-	file := flag.Args()[0]
+	file := "data.txt"
 	f, err := os.Open(file)
 	if err != nil {
 		fmt.Println(err)
